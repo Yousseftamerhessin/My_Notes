@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart'; // استيراد مكتبة الأيقونات
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class CustomAppBar extends StatefulWidget {
   const CustomAppBar({super.key});
@@ -9,11 +9,9 @@ class CustomAppBar extends StatefulWidget {
 }
 
 class _CustomAppBarState extends State<CustomAppBar> {
-  bool isNewFirst = true; // حالة للتحكم في ترتيب العناصر
+  bool isNewFirst = true;
 
-  // دالة لفرز وتخزين الملاحظات
   void _sortAndStoreNotes() {
-    // منطق فرز وتخزين الملاحظات
     print('تبديل الترتيب: ${isNewFirst ? 'الأحدث أولاً' : 'الأقدم أولاً'}');
   }
 
@@ -31,14 +29,12 @@ class _CustomAppBarState extends State<CustomAppBar> {
           ),
           IconButton(
             icon: isNewFirst
-                ? const Icon(
-                    FontAwesomeIcons.sortAmountDown) // أيقونة "ترتيب تنازلي"
-                : const Icon(
-                    FontAwesomeIcons.sortAmountUp), // أيقونة "ترتيب تصاعدي"
+                ? const Icon(FontAwesomeIcons.sortAmountDown)
+                : const Icon(FontAwesomeIcons.sortAmountUp),
             onPressed: () {
               setState(() {
-                isNewFirst = !isNewFirst; // تبديل حالة ترتيب العناصر
-                _sortAndStoreNotes(); // استدعاء دالة الفرز والتخزين
+                isNewFirst = !isNewFirst;
+                _sortAndStoreNotes();
               });
             },
           ),
