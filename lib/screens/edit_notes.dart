@@ -1,15 +1,10 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 
 class EditNotes extends StatelessWidget {
-  EditNotes(
-      {super.key,
-      required StreamController<dynamic> sessionStateStream,
-      required note});
-
   final titleController = TextEditingController();
   final contentController = TextEditingController();
+
+  EditNotes({super.key});
 
   @override
   Widget build(BuildContext context) {

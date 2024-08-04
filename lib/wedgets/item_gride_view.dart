@@ -1,4 +1,4 @@
-import 'package:NotesApp/main.dart';
+import 'package:NotesApp/screens/edit_notes.dart';
 import 'package:flutter/material.dart';
 import 'package:focused_menu/focused_menu.dart';
 import 'package:focused_menu/modals.dart';
@@ -66,7 +66,7 @@ class ItemGridView extends StatelessWidget {
         onTap: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const NotesApp()),
+            MaterialPageRoute(builder: (context) => EditNotes()),
           );
         },
         child: Container(
