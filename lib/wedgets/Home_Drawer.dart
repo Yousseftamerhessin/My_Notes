@@ -11,8 +11,8 @@ class HomeDrawer extends StatelessWidget {
       child: Column(
         children: <Widget>[
           const UserAccountsDrawerHeader(
-            accountName: Text('اسم المستخدم'),
-            accountEmail: Text('البريد الإلكتروني@example.com'),
+            accountName: Text('User name'),
+            accountEmail: Text('Email '),
             currentAccountPicture: CircleAvatar(
               backgroundColor: Colors.orange,
               child: Text('A'),
@@ -20,7 +20,7 @@ class HomeDrawer extends StatelessWidget {
           ),
           ListTile(
             leading: const Icon(Icons.home),
-            title: const Text('الصفحة الرئيسية'),
+            title: const Text(' Home page'),
             onTap: () {
               Navigator.pop(context);
             },
@@ -39,7 +39,7 @@ class HomeDrawer extends StatelessWidget {
               final themeNotifier =
                   Provider.of<ThemeProvider>(context, listen: false);
               themeNotifier.toggleTheme();
-              Navigator.pop(context); // إغلاق الـ Drawer بعد التبديل
+              Navigator.pop(context);
             },
           ),
           ListTile(
