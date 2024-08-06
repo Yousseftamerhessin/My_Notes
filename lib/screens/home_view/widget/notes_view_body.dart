@@ -1,6 +1,6 @@
-import 'package:NotesApp/wedgets/Dynamic_Gride_View.dart';
-import 'package:NotesApp/wedgets/Custom_App_Bar.dart';
-import 'package:NotesApp/wedgets/Custom_Search.dart';
+import 'package:NotesApp/screens/home_view/widget/Dynamic_Gride_View.dart';
+import 'package:NotesApp/screens/home_view/widget/Custom_App_Bar.dart';
+import 'package:NotesApp/screens/home_view/widget/Custom_Search.dart';
 import 'package:flutter/material.dart';
 
 class NotesViewBody extends StatelessWidget {

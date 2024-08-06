@@ -1,4 +1,4 @@
-import 'package:NotesApp/screens/edit_notes.dart';
+import 'package:NotesApp/screens/edit_notes/Veiw/edit_notes.dart';
 import 'package:flutter/material.dart';
 import 'package:focused_menu/focused_menu.dart';
 import 'package:focused_menu/modals.dart';

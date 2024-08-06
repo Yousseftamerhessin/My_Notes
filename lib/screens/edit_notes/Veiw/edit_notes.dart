@@ -30,22 +30,16 @@ class EditNotes extends StatelessWidget {
                     child: const Icon(Icons.arrow_back_ios)),
               ),
               IconButton(
-                color: Colors.white,
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                padding: const EdgeInsets.all(0),
-                icon: Container(
-                    width: 40,
-                    height: 40,
-                    decoration: BoxDecoration(
-                        color: Colors.grey,
-                        borderRadius: BorderRadius.circular(10)),
-                    child: const Icon(
-                      Icons.delete,
-                      color: Colors.red,
-                    )),
-              )
+                  color: Colors.white,
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  padding: const EdgeInsets.all(0),
+                  icon: const Icon(
+                    size: 30,
+                    Icons.delete,
+                    color: Colors.red,
+                  )),
             ]),
             Expanded(
               child: ListView(

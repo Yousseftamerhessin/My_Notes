@@ -1,4 +1,4 @@
-import 'package:NotesApp/wedgets/item_gride_view.dart';
+import 'package:NotesApp/screens/home_view/widget/item_gride_view.dart';
 import 'package:dynamic_height_grid_view/dynamic_height_grid_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';

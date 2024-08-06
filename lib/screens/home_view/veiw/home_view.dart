@@ -1,10 +1,10 @@
-import 'package:NotesApp/screens/add_notes.dart';
-import 'package:NotesApp/wedgets/Home_Drawer.dart';
-import 'package:NotesApp/wedgets/notes_view_body.dart';
+import 'package:NotesApp/screens/%D9%90add_notes.dart/Veiw/add_notes.dart';
+import 'package:NotesApp/screens/home_view/widget/Home_Drawer.dart';
+import 'package:NotesApp/screens/home_view/widget/notes_view_body.dart';
 import 'package:flutter/material.dart';
 
-class NotesView extends StatelessWidget {
-  const NotesView({super.key});
+class HomeView extends StatelessWidget {
+  const HomeView({super.key});
 
   @override
   Widget build(BuildContext context) {
