@@ -19,7 +19,7 @@ class Auth extends StatelessWidget {
           } else if (snapshot.hasData) {
             return const HomeView();
           } else {
-            return LoginScreen();
+            return const LoginScreen();
           }
         },
       ),

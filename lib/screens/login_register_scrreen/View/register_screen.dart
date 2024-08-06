@@ -6,21 +6,31 @@ class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
 
   @override
-  State<RegisterScreen> createState() => _LoginScreenState();
+  State<RegisterScreen> createState() => _RegisterScreenState();
 }
 
-class _LoginScreenState extends State<RegisterScreen> {
+class _RegisterScreenState extends State<RegisterScreen> {
+  final _userNameController = TextEditingController();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
 
-  Future<void> sginUp() async {
-    if (passwordConfirmd()) {
+  Future<void> signUp() async {
+    if (passwordConfirmed()) {
       try {
-        await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        final userCredential =
+            await FirebaseAuth.instance.createUserWithEmailAndPassword(
           email: _emailController.text.trim(),
           password: _passwordController.text.trim(),
         );
+
+        final user = userCredential.user;
+
+        await user?.updateProfile(displayName: _userNameController.text.trim());
+
+        await user?.reload();
+        final updatedUser = FirebaseAuth.instance.currentUser;
+
         Navigator.of(context).pushNamed('/');
       } catch (e) {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -29,18 +39,19 @@ class _LoginScreenState extends State<RegisterScreen> {
       }
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Passwords do not match')),
+        const SnackBar(content: Text('Passwords do not match')),
       );
     }
   }
 
-  bool passwordConfirmd() {
+  bool passwordConfirmed() {
     return _passwordController.text.trim() ==
         _confirmPasswordController.text.trim();
   }
 
   @override
   void dispose() {
+    _userNameController.dispose();
     _emailController.dispose();
     _passwordController.dispose();
     _confirmPasswordController.dispose();
@@ -72,7 +83,7 @@ class _LoginScreenState extends State<RegisterScreen> {
                   ),
                 ),
                 const Text(
-                  'Welcom ! Here you can sgin Up :-)',
+                  'Welcome! Here you can sign up :-)',
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
@@ -86,8 +97,32 @@ class _LoginScreenState extends State<RegisterScreen> {
                   padding: const EdgeInsets.symmetric(horizontal: 25),
                   child: Container(
                     decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(12)),
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                      child: TextField(
+                        controller: _userNameController,
+                        decoration: const InputDecoration(
+                          icon: Icon(Icons.person),
+                          border: InputBorder.none,
+                          hintText: "User name",
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 25),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(12),
+                    ),
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20.0),
                       child: TextField(
@@ -108,8 +143,9 @@ class _LoginScreenState extends State<RegisterScreen> {
                   padding: const EdgeInsets.symmetric(horizontal: 25),
                   child: Container(
                     decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(12)),
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(12),
+                    ),
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20.0),
                       child: TextField(
@@ -131,8 +167,9 @@ class _LoginScreenState extends State<RegisterScreen> {
                   padding: const EdgeInsets.symmetric(horizontal: 25),
                   child: Container(
                     decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(12)),
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(12),
+                    ),
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20.0),
                       child: TextField(
@@ -141,7 +178,7 @@ class _LoginScreenState extends State<RegisterScreen> {
                         decoration: const InputDecoration(
                           icon: Icon(Icons.lock),
                           border: InputBorder.none,
-                          hintText: "confirm password",
+                          hintText: "Confirm password",
                         ),
                       ),
                     ),
@@ -151,7 +188,7 @@ class _LoginScreenState extends State<RegisterScreen> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 25.0),
                   child: GestureDetector(
-                    onTap: sginUp,
+                    onTap: signUp,
                     child: Container(
                       padding: const EdgeInsets.all(16.0),
                       decoration: BoxDecoration(
@@ -159,13 +196,15 @@ class _LoginScreenState extends State<RegisterScreen> {
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: const Center(
-                          child: Text(
-                        'Sign up',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18.0,
+                        child: Text(
+                          'Sign up',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18.0,
+                            color: Colors.white, // تأكد من وضوح النص
+                          ),
                         ),
-                      )),
+                      ),
                     ),
                   ),
                 ),
@@ -184,7 +223,8 @@ class _LoginScreenState extends State<RegisterScreen> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => LoginScreen()),
+                            builder: (context) => LoginScreen(),
+                          ),
                         );
                       },
                       child: const Text(
@@ -196,7 +236,7 @@ class _LoginScreenState extends State<RegisterScreen> {
                       ),
                     ),
                   ],
-                )
+                ),
               ],
             ),
           ),

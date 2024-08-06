@@ -18,6 +18,7 @@ class FirstSplash extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 10.0),
                 child: LottieBuilder.asset('assets/photo/Animation_first.json'),
               ),
+              const SizedBox(height: 50.0),
               const Text(
                 'Take notes on',
                 style: TextStyle(

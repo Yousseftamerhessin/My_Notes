@@ -1,10 +1,45 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class EditNotes extends StatelessWidget {
+  final String noteId;
+  final String initialTitle;
+  final String initialContent;
+
   final titleController = TextEditingController();
   final contentController = TextEditingController();
 
-  EditNotes({super.key});
+  EditNotes({
+    super.key,
+    required this.noteId,
+    required this.initialTitle,
+    required this.initialContent,
+  }) {
+    titleController.text = initialTitle;
+    contentController.text = initialContent;
+  }
+
+  Future<void> _updateNote(BuildContext context) async {
+    final title = titleController.text;
+    final content = contentController.text;
+
+    if (title.isEmpty || content.isEmpty) {
+      return;
+    }
+
+    await FirebaseFirestore.instance.collection('notes').doc(noteId).update({
+      'title': title,
+      'content': content,
+      'date': Timestamp.now(),
+    });
+
+    Navigator.pop(context);
+  }
+
+  Future<void> _deleteNote(BuildContext context) async {
+    await FirebaseFirestore.instance.collection('notes').doc(noteId).delete();
+    Navigator.pop(context);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +55,6 @@ class EditNotes extends StatelessWidget {
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                //padding: const EdgeInsets.all(0),
                 icon: Container(
                     width: 40,
                     height: 40,
@@ -30,16 +64,14 @@ class EditNotes extends StatelessWidget {
                     child: const Icon(Icons.arrow_back_ios)),
               ),
               IconButton(
-                  color: Colors.white,
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  padding: const EdgeInsets.all(0),
-                  icon: const Icon(
-                    size: 30,
-                    Icons.delete,
-                    color: Colors.red,
-                  )),
+                color: Colors.white,
+                onPressed: () => _deleteNote(context),
+                icon: const Icon(
+                  size: 30,
+                  Icons.delete,
+                  color: Colors.red,
+                ),
+              ),
             ]),
             Expanded(
               child: ListView(
@@ -79,9 +111,7 @@ class EditNotes extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.pop(context);
-        },
+        onPressed: () => _updateNote(context),
         elevation: 10,
         backgroundColor: Colors.grey,
         child: const Icon(Icons.save),

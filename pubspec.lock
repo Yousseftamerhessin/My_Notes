@@ -73,6 +73,30 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.1.1"
+  cloud_firestore:
+    dependency: "direct main"
+    description:
+      name: cloud_firestore
+      sha256: a31eec60eadaa859f0677bf661d9f86ed15961c716512f64884e59edcb341472
+      url: "https://pub.dev"
+    source: hosted
+    version: "5.2.1"
+  cloud_firestore_platform_interface:
+    dependency: transitive
+    description:
+      name: cloud_firestore_platform_interface
+      sha256: "3224e6158441c8897325e74f9971140cde2c85ee75a26704407a91b969b50829"
+      url: "https://pub.dev"
+    source: hosted
+    version: "6.3.1"
+  cloud_firestore_web:
+    dependency: transitive
+    description:
+      name: cloud_firestore_web
+      sha256: c1312945cb7dd55921bcc10445f6c9a494bc04104b7d0821c3ed577b970ab088
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.1.1"
   collection:
     dependency: transitive
     description:
@@ -674,6 +698,30 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.2.2"
+  url_launcher:
+    dependency: "direct main"
+    description:
+      name: url_launcher
+      sha256: "21b704ce5fa560ea9f3b525b43601c678728ba46725bab9b01187b4831377ed3"
+      url: "https://pub.dev"
+    source: hosted
+    version: "6.3.0"
+  url_launcher_android:
+    dependency: transitive
+    description:
+      name: url_launcher_android
+      sha256: "94d8ad05f44c6d4e2ffe5567ab4d741b82d62e3c8e288cc1fcea45965edf47c9"
+      url: "https://pub.dev"
+    source: hosted
+    version: "6.3.8"
+  url_launcher_ios:
+    dependency: transitive
+    description:
+      name: url_launcher_ios
+      sha256: e43b677296fadce447e987a2f519dcf5f6d1e527dc35d01ffab4fff5b8a7063e
+      url: "https://pub.dev"
+    source: hosted
+    version: "6.3.1"
   url_launcher_linux:
     dependency: transitive
     description:
@@ -682,6 +730,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.1.1"
+  url_launcher_macos:
+    dependency: transitive
+    description:
+      name: url_launcher_macos
+      sha256: "9a1a42d5d2d95400c795b2914c36fdcb525870c752569438e4ebb09a2b5d90de"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.2.0"
   url_launcher_platform_interface:
     dependency: transitive
     description:

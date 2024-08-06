@@ -1,23 +1,42 @@
+import 'package:flutter/material.dart';
 import 'package:NotesApp/screens/home_view/widget/Dynamic_Gride_View.dart';
 import 'package:NotesApp/screens/home_view/widget/Custom_App_Bar.dart';
 import 'package:NotesApp/screens/home_view/widget/Custom_Search.dart';
-import 'package:flutter/material.dart';
+import 'package:NotesApp/screens/home_view/widget/Sort_icon.dart';
 
-class NotesViewBody extends StatelessWidget {
+class NotesViewBody extends StatefulWidget {
   const NotesViewBody({super.key});
 
   @override
+  _NotesViewBodyState createState() => _NotesViewBodyState();
+}
+
+class _NotesViewBodyState extends State<NotesViewBody> {
+  bool isNewFirst = true;
+
+  void _toggleSortOrder() {
+    setState(() {
+      isNewFirst = !isNewFirst;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return const Padding(
-      padding: EdgeInsets.symmetric(horizontal: 8),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8),
       child: Column(
         children: [
-          CustomAppBar(),
-          CustomSearch(),
-          SizedBox(
-            height: 10,
+          const CustomAppBar(),
+          const CustomSearch(),
+          SortIcon(
+            isNewFirst: isNewFirst,
+            onSortOrderChanged: _toggleSortOrder,
           ),
-          DynamicGrideView(),
+          Expanded(
+            child: DynamicGrideView(
+              isNewFirst: isNewFirst,
+            ),
+          ),
         ],
       ),
     );
