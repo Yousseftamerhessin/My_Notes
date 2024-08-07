@@ -1,7 +1,7 @@
 import 'package:NotesApp/Logic/Auth.dart';
 import 'package:NotesApp/Logic/theme_provider.dart';
-import 'package:NotesApp/Style/theme.dart';
-import 'package:NotesApp/screens/Splash_screen/Widgets/splashScreen.dart';
+import 'package:NotesApp/Style/theme.data/Light_Theme.dart';
+import 'package:NotesApp/screens/Splash_screen/View/splashScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';

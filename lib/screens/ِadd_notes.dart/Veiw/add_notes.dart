@@ -39,64 +39,49 @@ class AddNotes extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Add Note'),
+        backgroundColor: Colors.grey.shade800.withOpacity(0.8),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios),
+          onPressed: () => Navigator.pop(context),
+        ),
+      ),
       body: Padding(
-        padding: const EdgeInsets.fromLTRB(16, 50, 16, 0),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                IconButton(
-                  color: Colors.white,
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  padding: const EdgeInsets.all(0),
-                  icon: Container(
-                    width: 40,
-                    height: 40,
-                    decoration: BoxDecoration(
-                      color: Colors.grey.shade800.withOpacity(0.8),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: const Icon(Icons.arrow_back_ios),
+            TextField(
+              controller: titleController,
+              style: const TextStyle(
+                fontSize: 30.0,
+              ),
+              decoration: const InputDecoration(
+                border: InputBorder.none,
+                hintText: 'Title',
+                hintStyle: TextStyle(
+                  fontSize: 30.0,
+                  color: Colors.grey,
+                ),
+              ),
+              maxLines: 1,
+            ),
+            const SizedBox(height: 16.0),
+            Expanded(
+              child: TextField(
+                controller: contentController,
+                style: const TextStyle(
+                  fontSize: 18.0,
+                ),
+                decoration: const InputDecoration(
+                  border: InputBorder.none,
+                  hintText: 'Type something here',
+                  hintStyle: TextStyle(
+                    color: Colors.grey,
                   ),
                 ),
-              ],
-            ),
-            Expanded(
-              child: ListView(
-                children: [
-                  TextField(
-                    controller: titleController,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 30.0,
-                    ),
-                    decoration: const InputDecoration(
-                      border: InputBorder.none,
-                      hintText: 'Title',
-                      hintStyle: TextStyle(
-                        fontSize: 30.0,
-                        color: Colors.grey,
-                      ),
-                    ),
-                  ),
-                  TextField(
-                    controller: contentController,
-                    style: const TextStyle(
-                      color: Colors.white,
-                    ),
-                    decoration: const InputDecoration(
-                      border: InputBorder.none,
-                      hintText: 'Type something here',
-                      hintStyle: TextStyle(
-                        color: Colors.grey,
-                      ),
-                    ),
-                  ),
-                ],
+                maxLines: null,
+                keyboardType: TextInputType.multiline,
               ),
             ),
           ],
@@ -104,7 +89,6 @@ class AddNotes extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => _addNote(context),
-        elevation: 10,
         backgroundColor: Colors.grey.shade800.withOpacity(0.8),
         child: const Icon(Icons.save),
       ),

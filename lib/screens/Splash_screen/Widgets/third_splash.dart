@@ -1,27 +1,23 @@
-import 'package:NotesApp/screens/Splash_screen/View/First_splash.dart';
-import 'package:NotesApp/screens/Splash_screen/View/third_splash.dart';
+import 'package:NotesApp/Logic/Auth.dart';
+import 'package:NotesApp/screens/Splash_screen/Widgets/second_splash.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
-class SecondSplash extends StatelessWidget {
-  const SecondSplash({super.key});
+class ThirdSplash extends StatelessWidget {
+  const ThirdSplash({super.key});
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: const Color(0xFFFFD573),
+        backgroundColor: const Color(0xFF77BAEF),
         body: Stack(children: [
-          Center(
-            child:
-                Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                child:
-                    LottieBuilder.asset('assets/photo/Animation_second.json'),
-              ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              LottieBuilder.asset('assets/photo/Animation_third.json'),
               const Text(
-                'Organize every',
+                'Work more',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 50,
@@ -29,14 +25,14 @@ class SecondSplash extends StatelessWidget {
                 ),
               ),
               const Text(
-                'task',
+                'effectively',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 50,
                   letterSpacing: -2,
                 ),
               ),
-            ]),
+            ],
           ),
           Positioned(
             bottom: 16,
@@ -49,16 +45,11 @@ class SecondSplash extends StatelessWidget {
               onPressed: () {
                 Navigator.pushAndRemoveUntil(
                   context,
-                  MaterialPageRoute(builder: (context) => const FirstSplash()),
+                  MaterialPageRoute(builder: (context) => const SecondSplash()),
                   ModalRoute.withName('/'),
                 );
               },
-              child: const Text(
-                'Back',
-                style: TextStyle(
-                  color: Colors.black,
-                ),
-              ),
+              child: const Text('Back'),
             ),
           ),
         ]),
@@ -66,7 +57,7 @@ class SecondSplash extends StatelessWidget {
           onPressed: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const ThirdSplash()),
+              MaterialPageRoute(builder: (context) => const Auth()),
             );
           },
           shape: RoundedRectangleBorder(

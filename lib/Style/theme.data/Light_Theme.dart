@@ -7,9 +7,3 @@ final ThemeData lightTheme = ThemeData(
   scaffoldBackgroundColor: Colors.grey[200],
   textTheme: const TextTheme(),
 );
-
-final ThemeData darkTheme = ThemeData(
-  brightness: Brightness.dark,
-  primarySwatch: Colors.teal,
-  hintColor: Colors.white,
-);

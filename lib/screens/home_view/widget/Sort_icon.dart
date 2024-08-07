@@ -14,9 +14,9 @@ class SortIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Align(
-      alignment: Alignment.centerLeft, // محاذاة الأيقونة على الشمال
+      alignment: Alignment.centerLeft,
       child: IconButton(
-        iconSize: 24.0, // تصغير حجم الأيقونة
+        iconSize: 15.0,
         icon: Icon(
           isNewFirst
               ? FontAwesomeIcons.sortAmountDown

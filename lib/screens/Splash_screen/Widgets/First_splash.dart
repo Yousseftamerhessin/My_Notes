@@ -1,4 +1,4 @@
-import 'package:NotesApp/screens/Splash_screen/View/second_splash.dart';
+import 'package:NotesApp/screens/Splash_screen/Widgets/second_splash.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 

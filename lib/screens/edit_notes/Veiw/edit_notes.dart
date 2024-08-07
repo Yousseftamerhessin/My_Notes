@@ -24,16 +24,28 @@ class EditNotes extends StatelessWidget {
     final content = contentController.text;
 
     if (title.isEmpty || content.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Title and content cannot be empty.'),
+        ),
+      );
       return;
     }
 
-    await FirebaseFirestore.instance.collection('notes').doc(noteId).update({
-      'title': title,
-      'content': content,
-      'date': Timestamp.now(),
-    });
-
-    Navigator.pop(context);
+    try {
+      await FirebaseFirestore.instance.collection('notes').doc(noteId).update({
+        'title': title,
+        'content': content,
+        'date': Timestamp.now(),
+      });
+      Navigator.pop(context);
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Failed to update note: $e'),
+        ),
+      );
+    }
   }
 
   Future<void> _deleteNote(BuildContext context) async {
@@ -44,67 +56,58 @@ class EditNotes extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Edit Note'),
+        backgroundColor: Colors.grey.shade800.withOpacity(0.8),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios),
+          onPressed: () => Navigator.pop(context),
+        ),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.delete),
+            onPressed: () => _deleteNote(context),
+            color: Colors.red,
+          ),
+        ],
+      ),
       body: Padding(
-        padding: const EdgeInsets.fromLTRB(16, 50, 16, 0),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-              IconButton(
+            TextField(
+              controller: titleController,
+              style: const TextStyle(
                 color: Colors.white,
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                icon: Container(
-                    width: 40,
-                    height: 40,
-                    decoration: BoxDecoration(
-                        color: Colors.grey,
-                        borderRadius: BorderRadius.circular(10)),
-                    child: const Icon(Icons.arrow_back_ios)),
+                fontSize: 30.0,
               ),
-              IconButton(
-                color: Colors.white,
-                onPressed: () => _deleteNote(context),
-                icon: const Icon(
-                  size: 30,
-                  Icons.delete,
-                  color: Colors.red,
+              decoration: const InputDecoration(
+                border: InputBorder.none,
+                hintText: 'Title',
+                hintStyle: TextStyle(
+                  fontSize: 30.0,
+                  color: Colors.grey,
                 ),
               ),
-            ]),
+              maxLines: 1,
+            ),
+            const SizedBox(height: 16.0),
             Expanded(
-              child: ListView(
-                children: [
-                  TextField(
-                    controller: titleController,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 30.0,
-                    ),
-                    decoration: const InputDecoration(
-                      border: InputBorder.none,
-                      hintText: 'Title',
-                      hintStyle: TextStyle(
-                        fontSize: 30.0,
-                        color: Colors.grey,
-                      ),
-                    ),
+              child: TextField(
+                controller: contentController,
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 18.0,
+                ),
+                decoration: const InputDecoration(
+                  border: InputBorder.none,
+                  hintText: 'Type something here',
+                  hintStyle: TextStyle(
+                    color: Colors.grey,
                   ),
-                  TextField(
-                    controller: contentController,
-                    style: const TextStyle(
-                      color: Colors.white,
-                    ),
-                    decoration: const InputDecoration(
-                      border: InputBorder.none,
-                      hintText: 'Type something here',
-                      hintStyle: TextStyle(
-                        color: Colors.grey,
-                      ),
-                    ),
-                  ),
-                ],
+                ),
+                maxLines: null,
+                keyboardType: TextInputType.multiline,
               ),
             ),
           ],
@@ -112,8 +115,7 @@ class EditNotes extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => _updateNote(context),
-        elevation: 10,
-        backgroundColor: Colors.grey,
+        backgroundColor: Colors.grey.shade800.withOpacity(0.8),
         child: const Icon(Icons.save),
       ),
     );

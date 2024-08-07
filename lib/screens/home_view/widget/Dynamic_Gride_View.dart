@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:dynamic_height_grid_view/dynamic_height_grid_view.dart';
 import 'item_gride_view.dart';
-import 'package:intl/intl.dart'; // لتنسيق التاريخ بشكل أفضل
+import 'package:intl/intl.dart';
 
 class DynamicGrideView extends StatelessWidget {
   final bool isNewFirst;
@@ -36,7 +36,7 @@ class DynamicGrideView extends StatelessWidget {
             final date = timestamp != null
                 ? DateFormat('yyyy-MM-dd').format(timestamp.toDate())
                 : 'Unknown date';
-            print('Document data: $data'); // طباعة البيانات للتحقق
+            print('Document data: $data');
             return {
               'id': doc.id,
               'title': data['title'] ?? '',
@@ -58,7 +58,6 @@ class DynamicGrideView extends StatelessWidget {
                 description: item['description']!,
                 date: item['date']!,
                 onTap: () {
-                  // Navigate to EditNotes
                   Navigator.push(
                     context,
                     MaterialPageRoute(
