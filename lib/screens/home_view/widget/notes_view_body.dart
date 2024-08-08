@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:NotesApp/screens/home_view/widget/Dynamic_Gride_View.dart';
-import 'package:NotesApp/screens/home_view/widget/Custom_App_Bar.dart';
-import 'package:NotesApp/screens/home_view/widget/Custom_Search.dart';
-import 'package:NotesApp/screens/home_view/widget/Sort_icon.dart';
+import 'package:NotesApp/screens/home_view/widget/Dynamic_Gride_View.dart'; 
+import 'package:NotesApp/screens/home_view/widget/Custom_App_Bar.dart'; 
+import 'package:NotesApp/screens/home_view/widget/Custom_Search.dart'; 
+import 'package:NotesApp/screens/home_view/widget/Sort_icon.dart'; 
 
 class NotesViewBody extends StatefulWidget {
   const NotesViewBody({super.key});
@@ -27,7 +27,9 @@ class _NotesViewBodyState extends State<NotesViewBody> {
       child: Column(
         children: [
           const CustomAppBar(),
-          const CustomSearch(),
+          CustomSearch(onSearch: (query) {
+            print('Search query: $query');
+          }),
           SortIcon(
             isNewFirst: isNewFirst,
             onSortOrderChanged: _toggleSortOrder,

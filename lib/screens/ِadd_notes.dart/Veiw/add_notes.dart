@@ -1,13 +1,27 @@
+import 'package:NotesApp/Style/color_picker.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-class AddNotes extends StatelessWidget {
+class AddNotes extends StatefulWidget {
+  @override
+  _AddNotesState createState() => _AddNotesState();
+}
+
+class _AddNotesState extends State<AddNotes> {
   final titleController = TextEditingController();
   final contentController = TextEditingController();
+  Color _selectedColor = Colors.blue; 
 
-  AddNotes({super.key});
+  Future<void> _selectColor() async {
+    final color = await showColorPickerDialog(context);
+    if (color != null) {
+      setState(() {
+        _selectedColor = color;
+      });
+    }
+  }
 
-  Future<void> _addNote(BuildContext context) async {
+  Future<void> _addNote() async {
     final title = titleController.text;
     final content = contentController.text;
 
@@ -25,6 +39,7 @@ class AddNotes extends StatelessWidget {
         'title': title,
         'content': content,
         'date': Timestamp.now(),
+        'color': _selectedColor.value, 
       });
       Navigator.pop(context);
     } catch (e) {
@@ -40,8 +55,7 @@ class AddNotes extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Add Note'),
-        backgroundColor: Colors.grey.shade800.withOpacity(0.8),
+        title: const Text('Add Note'),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios),
           onPressed: () => Navigator.pop(context),
@@ -84,11 +98,16 @@ class AddNotes extends StatelessWidget {
                 keyboardType: TextInputType.multiline,
               ),
             ),
+            const SizedBox(height: 16.0),
+            ElevatedButton(
+              onPressed: _selectColor,
+              child: const Text('Select Color'),
+            ),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => _addNote(context),
+        onPressed: _addNote,
         backgroundColor: Colors.grey.shade800.withOpacity(0.8),
         child: const Icon(Icons.save),
       ),

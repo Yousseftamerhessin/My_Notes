@@ -4,6 +4,7 @@ class ItemGridView extends StatelessWidget {
   final String title;
   final String description;
   final String date;
+  final Color color; // إضافة خاصية اللون
   final VoidCallback onTap;
 
   const ItemGridView({
@@ -11,6 +12,7 @@ class ItemGridView extends StatelessWidget {
     required this.title,
     required this.description,
     required this.date,
+    required this.color, // استلام اللون
     required this.onTap,
   });
 
@@ -21,7 +23,7 @@ class ItemGridView extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(8.0),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: color, // استخدام اللون الممرر
           borderRadius: BorderRadius.circular(8.0),
           boxShadow: [
             BoxShadow(

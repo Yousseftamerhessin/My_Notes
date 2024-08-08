@@ -1,9 +1,9 @@
 import 'package:NotesApp/screens/edit_notes/Veiw/edit_notes.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:dynamic_height_grid_view/dynamic_height_grid_view.dart';
 import 'item_gride_view.dart';
-import 'package:intl/intl.dart';
 
 class DynamicGrideView extends StatelessWidget {
   final bool isNewFirst;
@@ -36,12 +36,17 @@ class DynamicGrideView extends StatelessWidget {
             final date = timestamp != null
                 ? DateFormat('yyyy-MM-dd').format(timestamp.toDate())
                 : 'Unknown date';
-            print('Document data: $data');
+
+            // التعامل مع اللون وتوفير قيمة افتراضية إذا كان اللون غير موجود
+            final colorValue = data['color'] as int?;
+            final color = colorValue != null ? Color(colorValue) : Colors.white;
+
             return {
               'id': doc.id,
               'title': data['title'] ?? '',
               'description': data['content'] ?? '',
               'date': date,
+              'color': color, // إضافة اللون إلى البيانات
             };
           }).toList();
 
@@ -57,6 +62,7 @@ class DynamicGrideView extends StatelessWidget {
                 title: item['title']!,
                 description: item['description']!,
                 date: item['date']!,
+                color: item['color']!, // تمرير اللون إلى ItemGridView
                 onTap: () {
                   Navigator.push(
                     context,

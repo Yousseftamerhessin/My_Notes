@@ -57,8 +57,7 @@ class EditNotes extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Edit Note'),
-        backgroundColor: Colors.grey.shade800.withOpacity(0.8),
+        title: const Text('Edit Note'),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios),
           onPressed: () => Navigator.pop(context),
@@ -78,7 +77,6 @@ class EditNotes extends StatelessWidget {
             TextField(
               controller: titleController,
               style: const TextStyle(
-                color: Colors.white,
                 fontSize: 30.0,
               ),
               decoration: const InputDecoration(
@@ -86,7 +84,6 @@ class EditNotes extends StatelessWidget {
                 hintText: 'Title',
                 hintStyle: TextStyle(
                   fontSize: 30.0,
-                  color: Colors.grey,
                 ),
               ),
               maxLines: 1,
@@ -96,14 +93,12 @@ class EditNotes extends StatelessWidget {
               child: TextField(
                 controller: contentController,
                 style: const TextStyle(
-                  color: Colors.white,
                   fontSize: 18.0,
                 ),
                 decoration: const InputDecoration(
                   border: InputBorder.none,
                   hintText: 'Type something here',
                   hintStyle: TextStyle(
-                    color: Colors.grey,
                   ),
                 ),
                 maxLines: null,
@@ -115,7 +110,6 @@ class EditNotes extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => _updateNote(context),
-        backgroundColor: Colors.grey.shade800.withOpacity(0.8),
         child: const Icon(Icons.save),
       ),
     );
