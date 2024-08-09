@@ -4,7 +4,7 @@ class ItemGridView extends StatelessWidget {
   final String title;
   final String description;
   final String date;
-  final Color color; // إضافة خاصية اللون
+  final Color color; 
   final VoidCallback onTap;
 
   const ItemGridView({
@@ -12,7 +12,7 @@ class ItemGridView extends StatelessWidget {
     required this.title,
     required this.description,
     required this.date,
-    required this.color, // استلام اللون
+    required this.color, 
     required this.onTap,
   });
 
@@ -34,6 +34,7 @@ class ItemGridView extends StatelessWidget {
               style: const TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 16.0,
+                color: Colors.black,
               ),
             ),
             const SizedBox(height: 4.0),
@@ -42,6 +43,8 @@ class ItemGridView extends StatelessWidget {
               maxLines: 3,
               overflow: TextOverflow.ellipsis,
               style: const TextStyle(
+              color: Colors.black,
+
                 fontSize: 14.0,
               ),
             ),

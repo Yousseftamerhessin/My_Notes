@@ -4,9 +4,9 @@ class CustomSearch extends StatelessWidget {
   final Function(String) onSearch;
 
   const CustomSearch({
-    super.key,
+    Key? key,
     required this.onSearch,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,19 +16,14 @@ class CustomSearch extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 10),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(30),
-          color: Colors.grey[200], // إضافة لون خلفية للتصميم
+          color: Colors.grey[200],
         ),
         child: TextField(
-          onChanged: onSearch, // تمرير دالة البحث
-          style: const TextStyle(
-            fontSize: 16.0,
-          ),
+          onChanged: onSearch, // تأكد من أن هذا يتم استدعاؤه بشكل صحيح
+          style: const TextStyle(fontSize: 16.0),
           decoration: const InputDecoration(
             contentPadding: EdgeInsets.all(0),
-            prefixIcon: Icon(
-              Icons.search,
-              size: 20,
-            ),
+            prefixIcon: Icon(Icons.search, size: 20),
             prefixIconConstraints: BoxConstraints(maxHeight: 20, minWidth: 25),
             border: InputBorder.none,
             hintText: 'Search Notes...',

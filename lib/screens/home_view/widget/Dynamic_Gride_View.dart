@@ -8,11 +8,13 @@ import 'item_gride_view.dart';
 
 class DynamicGrideView extends StatefulWidget {
   final bool isNewFirst;
+  final String searchQuery;
 
   const DynamicGrideView({
-    super.key,
+    Key? key,
     required this.isNewFirst,
-  });
+    required this.searchQuery,
+  }) : super(key: key);
 
   @override
   _DynamicGrideViewState createState() => _DynamicGrideViewState();
@@ -20,11 +22,28 @@ class DynamicGrideView extends StatefulWidget {
 
 class _DynamicGrideViewState extends State<DynamicGrideView> {
   late bool _isNewFirst;
+  late String _searchQuery;
 
   @override
   void initState() {
     super.initState();
     _isNewFirst = widget.isNewFirst;
+    _searchQuery = widget.searchQuery;
+  }
+
+  @override
+  void didUpdateWidget(covariant DynamicGrideView oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.searchQuery != oldWidget.searchQuery) {
+      setState(() {
+        _searchQuery = widget.searchQuery;
+      });
+    }
+    if (widget.isNewFirst != oldWidget.isNewFirst) {
+      setState(() {
+        _isNewFirst = widget.isNewFirst;
+      });
+    }
   }
 
   @override
@@ -39,11 +58,17 @@ class _DynamicGrideViewState extends State<DynamicGrideView> {
       stream: FirebaseFirestore.instance
           .collection('notes')
           .where('userId', isEqualTo: user.uid)
+          .where('title', isGreaterThanOrEqualTo: _searchQuery)
+          .where('title', isLessThanOrEqualTo: '$_searchQuery\uf8ff') // For text search
           .orderBy('date', descending: _isNewFirst)
           .snapshots(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(child: CircularProgressIndicator());
+        }
+
+        if (snapshot.hasError) {
+          return Center(child: Text('Error: ${snapshot.error}'));
         }
 
         if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {

@@ -59,63 +59,85 @@ class _RegisterScreenState extends State<RegisterScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Center(
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Image.asset(
-                  'assets/photo/NotesIcon.png',
-                  height: 150.0,
-                ),
-                const SizedBox(height: 20.0),
-                const Text(
-                  'SIGN UP',
-                  style: TextStyle(
-                    fontSize: 40,
-                    fontWeight: FontWeight.bold,
+        child: Column(
+          children: [
+            Expanded(
+              child: SingleChildScrollView(
+                child: Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset(
+                        'assets/photo/NotesIcon.png',
+                        height: 150.0,
+                      ),
+                      const SizedBox(height: 20.0),
+                      const Text(
+                        'SIGN UP',
+                        style: TextStyle(
+                          fontSize: 40,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      const Text(
+                        'Welcome! Here you can sign up :-)',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      const SizedBox(height: 50.0),
+                      buildTextField(
+                        controller: _userNameController,
+                        icon: Icons.person,
+                        hintText: "User name",
+                      ),
+                      const SizedBox(height: 10),
+                      buildTextField(
+                        controller: _emailController,
+                        icon: Icons.email,
+                        hintText: "Email Address",
+                      ),
+                      const SizedBox(height: 10),
+                      buildTextField(
+                        controller: _passwordController,
+                        icon: Icons.lock,
+                        hintText: "Password",
+                        obscureText: true,
+                      ),
+                      const SizedBox(height: 10),
+                      buildTextField(
+                        controller: _confirmPasswordController,
+                        icon: Icons.lock,
+                        hintText: "Confirm password",
+                        obscureText: true,
+                      ),
+                      const SizedBox(height: 15),
+                      buildSignUpButton(signUp),
+                      const SizedBox(height: 20),
+                      buildLoginRedirectButton(context),
+                      const SizedBox(height: 20), // Add some spacing at the bottom
+                    ],
                   ),
                 ),
-                const Text(
-                  'Welcome! Here you can sign up :-)',
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                const SizedBox(height: 50.0),
-                buildTextField(
-                  controller: _userNameController,
-                  icon: Icons.person,
-                  hintText: "User name",
-                ),
-                const SizedBox(height: 10),
-                buildTextField(
-                  controller: _emailController,
-                  icon: Icons.email,
-                  hintText: "Email Address",
-                ),
-                const SizedBox(height: 10),
-                buildTextField(
-                  controller: _passwordController,
-                  icon: Icons.lock,
-                  hintText: "Password",
-                  obscureText: true,
-                ),
-                const SizedBox(height: 10),
-                buildTextField(
-                  controller: _confirmPasswordController,
-                  icon: Icons.lock,
-                  hintText: "Confirm password",
-                  obscureText: true,
-                ),
-                const SizedBox(height: 15),
-                buildSignUpButton(signUp),
-                const SizedBox(height: 20),
-                buildLoginRedirectButton(context),
-              ],
+              ),
             ),
-          ),
+            // Footer text
+            const Padding(
+              padding: EdgeInsets.all(16.0),
+              child: Align(
+                alignment: Alignment.bottomCenter, // Align the text to the bottom
+                child: Text(
+                  'Development by Youssef Tamer',
+                  style: TextStyle(
+                    fontSize: 16.0,
+                    color: Colors.black54,
+                  ),
+                  textAlign: TextAlign.center, // Center align text
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );

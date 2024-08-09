@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:NotesApp/screens/home_view/widget/Dynamic_Gride_View.dart'; 
-import 'package:NotesApp/screens/home_view/widget/Custom_Search.dart'; 
-import 'package:NotesApp/screens/home_view/widget/Sort_icon.dart'; 
+import 'package:NotesApp/screens/home_view/widget/Custom_Search.dart';
+import 'package:NotesApp/screens/home_view/widget/Dynamic_Gride_View.dart';
+import 'package:NotesApp/screens/home_view/widget/Sort_icon.dart';
 
 class NotesViewBody extends StatefulWidget {
-  const NotesViewBody({super.key});
+  const NotesViewBody({Key? key}) : super(key: key);
 
   @override
   _NotesViewBodyState createState() => _NotesViewBodyState();
@@ -12,11 +12,18 @@ class NotesViewBody extends StatefulWidget {
 
 class _NotesViewBodyState extends State<NotesViewBody> {
   bool isNewFirst = true;
+  String searchQuery = ''; // حالة لتخزين النص المدخل في البحث
 
   void _toggleSortOrder() {
     setState(() {
       isNewFirst = !isNewFirst;
       print('Sort order changed: $isNewFirst');
+    });
+  }
+
+  void _onSearch(String query) {
+    setState(() {
+      searchQuery = query;
     });
   }
 
@@ -26,9 +33,7 @@ class _NotesViewBodyState extends State<NotesViewBody> {
       padding: const EdgeInsets.symmetric(horizontal: 8),
       child: Column(
         children: [
-          CustomSearch(onSearch: (query) {
-            print('Search query: $query');
-          }),
+          CustomSearch(onSearch: _onSearch), // تمرير دالة البحث
           SortIcon(
             isNewFirst: isNewFirst,
             onSortOrderChanged: _toggleSortOrder,
@@ -36,6 +41,7 @@ class _NotesViewBodyState extends State<NotesViewBody> {
           Expanded(
             child: DynamicGrideView(
               isNewFirst: isNewFirst,
+              searchQuery: searchQuery, // تمرير نص البحث
             ),
           ),
         ],

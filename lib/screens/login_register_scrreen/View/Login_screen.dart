@@ -12,7 +12,7 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
-  bool _isLoading = false; 
+  bool _isLoading = false;
 
   Future<void> signIn() async {
     setState(() {
@@ -46,52 +46,70 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Center(
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Image.asset(
-                  'assets/photo/NotesIcon.png',
-                  height: 150.0,
-                ),
-                const SizedBox(height: 20.0),
-                const Text(
-                  'SIGN IN',
-                  style: TextStyle(
-                    fontSize: 40,
-                    fontWeight: FontWeight.bold,
+        child: Column(
+          children: [
+            Expanded(
+              child: SingleChildScrollView(
+                child: Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset(
+                        'assets/photo/NotesIcon.png',
+                        height: 150.0,
+                      ),
+                      const SizedBox(height: 20.0),
+                      const Text(
+                        'SIGN IN',
+                        style: TextStyle(
+                          fontSize: 40,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      const Text(
+                        'Welcome back! Nice to see you again :-)',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      const SizedBox(height: 50.0),
+                      buildTextField(
+                        controller: _emailController,
+                        icon: Icons.email,
+                        hintText: "Email Address",
+                      ),
+                      const SizedBox(height: 10),
+                      buildTextField(
+                        controller: _passwordController,
+                        icon: Icons.lock,
+                        hintText: "Password",
+                        obscureText: true,
+                      ),
+                      const SizedBox(height: 15),
+                      _isLoading
+                        ? const CircularProgressIndicator()
+                        : buildSignInButton(signIn),
+                      const SizedBox(height: 20),
+                      buildRegisterRedirectButton(context),
+                    ],
                   ),
                 ),
-                const Text(
-                  'Welcome back! Nice to see you again :-)',
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                const SizedBox(height: 50.0),
-                buildTextField(
-                  controller: _emailController,
-                  icon: Icons.email,
-                  hintText: "Email Address",
-                ),
-                const SizedBox(height: 10),
-                buildTextField(
-                  controller: _passwordController,
-                  icon: Icons.lock,
-                  hintText: "Password",
-                  obscureText: true,
-                ),
-                const SizedBox(height: 15),
-                _isLoading
-                  ? const CircularProgressIndicator() 
-                  : buildSignInButton(signIn),
-                const SizedBox(height: 20),
-                buildRegisterRedirectButton(context),
-              ],
+              ),
             ),
-          ),
+            // Footer text
+            const Padding(
+              padding: EdgeInsets.all(16.0),
+              child: Text(
+                'Development by Youssef Tamer',
+                style: TextStyle(
+                  fontSize: 16.0,
+                  color: Colors.black54,
+                ),
+                textAlign: TextAlign.center, // Center align text
+              ),
+            ),
+          ],
         ),
       ),
     );

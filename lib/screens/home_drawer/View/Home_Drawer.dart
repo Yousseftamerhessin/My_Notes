@@ -35,6 +35,17 @@ class HomeDrawer extends StatelessWidget {
           const RateApp(),
           const HelpTile(),
           const LogOut(),
+           const Spacer(),    
+          const Padding(
+            padding: EdgeInsets.all(16.0), 
+            child: Text(
+              'Development by Youssef Tamer',
+              style: TextStyle(
+                fontSize: 16.0,
+                color: Colors.black54,    
+              ),
+            ),
+          ),
         ],
       ),
     );
