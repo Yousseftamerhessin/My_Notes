@@ -59,7 +59,7 @@ class _DynamicGrideViewState extends State<DynamicGrideView> {
           .collection('notes')
           .where('userId', isEqualTo: user.uid)
           .where('title', isGreaterThanOrEqualTo: _searchQuery)
-          .where('title', isLessThanOrEqualTo: '$_searchQuery\uf8ff') // For text search
+          .where('title', isLessThanOrEqualTo: '$_searchQuery\uf8ff')
           .orderBy('date', descending: _isNewFirst)
           .snapshots(),
       builder: (context, snapshot) {

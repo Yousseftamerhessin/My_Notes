@@ -12,7 +12,7 @@ class NotesViewBody extends StatefulWidget {
 
 class _NotesViewBodyState extends State<NotesViewBody> {
   bool isNewFirst = true;
-  String searchQuery = ''; // حالة لتخزين النص المدخل في البحث
+  String searchQuery = ''; 
 
   void _toggleSortOrder() {
     setState(() {
@@ -33,7 +33,7 @@ class _NotesViewBodyState extends State<NotesViewBody> {
       padding: const EdgeInsets.symmetric(horizontal: 8),
       child: Column(
         children: [
-          CustomSearch(onSearch: _onSearch), // تمرير دالة البحث
+          CustomSearch(onSearch: _onSearch),
           SortIcon(
             isNewFirst: isNewFirst,
             onSortOrderChanged: _toggleSortOrder,
@@ -41,7 +41,7 @@ class _NotesViewBodyState extends State<NotesViewBody> {
           Expanded(
             child: DynamicGrideView(
               isNewFirst: isNewFirst,
-              searchQuery: searchQuery, // تمرير نص البحث
+              searchQuery: searchQuery, 
             ),
           ),
         ],

@@ -19,7 +19,7 @@ class CustomSearch extends StatelessWidget {
           color: Colors.grey[200],
         ),
         child: TextField(
-          onChanged: onSearch, // تأكد من أن هذا يتم استدعاؤه بشكل صحيح
+          onChanged: onSearch,
           style: const TextStyle(fontSize: 16.0),
           decoration: const InputDecoration(
             contentPadding: EdgeInsets.all(0),

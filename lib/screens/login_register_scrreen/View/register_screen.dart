@@ -116,7 +116,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       buildSignUpButton(signUp),
                       const SizedBox(height: 20),
                       buildLoginRedirectButton(context),
-                      const SizedBox(height: 20), // Add some spacing at the bottom
+                      const SizedBox(height: 20), 
                     ],
                   ),
                 ),
@@ -126,14 +126,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
             const Padding(
               padding: EdgeInsets.all(16.0),
               child: Align(
-                alignment: Alignment.bottomCenter, // Align the text to the bottom
+                alignment: Alignment.bottomCenter,
                 child: Text(
                   'Development by Youssef Tamer',
                   style: TextStyle(
                     fontSize: 16.0,
-                    color: Colors.black54,
                   ),
-                  textAlign: TextAlign.center, // Center align text
+                  textAlign: TextAlign.center, 
                 ),
               ),
             ),

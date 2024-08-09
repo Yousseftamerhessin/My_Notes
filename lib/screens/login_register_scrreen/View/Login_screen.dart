@@ -53,6 +53,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: Center(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Image.asset(
                         'assets/photo/NotesIcon.png',
@@ -104,9 +105,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 'Development by Youssef Tamer',
                 style: TextStyle(
                   fontSize: 16.0,
-                  color: Colors.black54,
                 ),
-                textAlign: TextAlign.center, // Center align text
+                textAlign: TextAlign.center,
               ),
             ),
           ],

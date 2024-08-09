@@ -41,8 +41,7 @@ class HomeDrawer extends StatelessWidget {
             child: Text(
               'Development by Youssef Tamer',
               style: TextStyle(
-                fontSize: 16.0,
-                color: Colors.black54,    
+                fontSize: 14.0,
               ),
             ),
           ),
