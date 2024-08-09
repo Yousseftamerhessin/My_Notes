@@ -11,7 +11,7 @@ class AddNotes extends StatefulWidget {
 class _AddNotesState extends State<AddNotes> {
   final titleController = TextEditingController();
   final contentController = TextEditingController();
-  Color _selectedColor = Colors.blue;
+  Color _selectedColor = Colors.white;
 
   Future<void> _selectColor() async {
     final color = await showColorPickerDialog(context);

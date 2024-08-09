@@ -21,12 +21,11 @@ class HomeDrawer extends StatelessWidget {
             accountName: Text(userName),
             accountEmail: Text(userEmail),
             currentAccountPicture: CircleAvatar(
-              backgroundColor: Colors.orange,
               child: Text(userName.isNotEmpty ? userName[0] : 'A'),
             ),
           ),
           ListTile(
-            leading: const Icon(Icons.home),
+            leading: const Icon(Icons.home_outlined),
             title: const Text('Home page'),
             onTap: () {
               Navigator.pop(context);
