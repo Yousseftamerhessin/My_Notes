@@ -15,14 +15,13 @@ class CustomSearch extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 10),
         decoration: BoxDecoration(
-          color: Colors.grey.shade800.withOpacity(0.8),
           borderRadius: BorderRadius.circular(30),
+          color: Colors.grey[200], // إضافة لون خلفية للتصميم
         ),
         child: TextField(
-          onChanged: onSearch, // استدعاء onSearch كلما تغير النص
+          onChanged: onSearch, // تمرير دالة البحث
           style: const TextStyle(
             fontSize: 16.0,
-            color: Colors.white,
           ),
           decoration: const InputDecoration(
             contentPadding: EdgeInsets.all(0),

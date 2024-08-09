@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:NotesApp/screens/home_view/widget/Dynamic_Gride_View.dart'; 
-import 'package:NotesApp/screens/home_view/widget/Custom_App_Bar.dart'; 
 import 'package:NotesApp/screens/home_view/widget/Custom_Search.dart'; 
 import 'package:NotesApp/screens/home_view/widget/Sort_icon.dart'; 
 
@@ -27,7 +26,6 @@ class _NotesViewBodyState extends State<NotesViewBody> {
       padding: const EdgeInsets.symmetric(horizontal: 8),
       child: Column(
         children: [
-          const CustomAppBar(),
           CustomSearch(onSearch: (query) {
             print('Search query: $query');
           }),

@@ -1,5 +1,6 @@
 import 'package:NotesApp/screens/%D9%90add_notes.dart/Veiw/add_notes.dart';
 import 'package:NotesApp/screens/home_drawer/View/Home_Drawer.dart';
+import 'package:NotesApp/screens/home_view/widget/Custom_App_Bar.dart';
 import 'package:NotesApp/screens/home_view/widget/notes_view_body.dart';
 import 'package:flutter/material.dart';
 
@@ -19,6 +20,7 @@ class HomeView extends StatelessWidget {
         child: const Icon(Icons.add),
       ),
       drawer: const HomeDrawer(),
+      appBar: const CustomAppBar(),
       body: const NotesViewBody(),
     );
   }

@@ -6,21 +6,24 @@ Future<Color?> showColorPickerDialog(BuildContext context) {
     context: context,
     builder: (context) {
       return AlertDialog(
-        title: const Text('Select Color'),
+        title: const Row(
+          children: [
+            Icon(Icons.color_lens, color:Color(0xFFFE6902),),
+            SizedBox(width: 8.0),
+            Text('Select Color'),
+          ],
+        ),
         content: SingleChildScrollView(
           child: BlockPicker(
-            pickerColor: Colors.yellow, 
+            pickerColor: const Color(0xFFFDA0B3),
             onColorChanged: (Color color) {
               Navigator.of(context).pop(color);
             },
             availableColors: const [
-              Colors.red,
-              Colors.green,
-              Colors.blue,
-              Colors.yellow,
-              Colors.orange,
-              Colors.purple,
-              Colors.teal,
+              Color(0xFFFFD573),
+              Color(0xFFFDA0B3),
+              Color(0xFF41B7FF),
+              Color(0xFFFE6902),
             ],
           ),
         ),

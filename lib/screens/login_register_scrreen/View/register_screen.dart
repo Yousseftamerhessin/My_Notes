@@ -28,7 +28,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         if (user != null) {
           await user.updateProfile(displayName: _userNameController.text.trim());
           await user.reload();
-          Navigator.of(context).pushReplacementNamed('/'); // استخدم pushReplacementNamed للانتقال إلى الشاشة الرئيسية
+          Navigator.of(context).pushReplacementNamed('/');  
         }
       } catch (e) {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -74,7 +74,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   style: TextStyle(
                     fontSize: 40,
                     fontWeight: FontWeight.bold,
-                    color: Colors.black,
                   ),
                 ),
                 const Text(
@@ -82,7 +81,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
-                    color: Colors.black,
                   ),
                 ),
                 const SizedBox(height: 50.0),

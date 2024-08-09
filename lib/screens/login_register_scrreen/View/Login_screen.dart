@@ -12,25 +12,25 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
-  bool _isLoading = false; // لإدارة حالة التحميل
+  bool _isLoading = false; 
 
   Future<void> signIn() async {
     setState(() {
-      _isLoading = true; // عرض مؤشر التحميل
+      _isLoading = true;
     });
     try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: _emailController.text.trim(),
         password: _passwordController.text.trim(),
       );
-      Navigator.of(context).pushReplacementNamed('/'); // انتقل إلى الشاشة الرئيسية
+      Navigator.of(context).pushReplacementNamed('/');   
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Failed to sign in: ${e.toString()}')),
       );
     } finally {
       setState(() {
-        _isLoading = false; // إخفاء مؤشر التحميل
+        _isLoading = false; 
       });
     }
   }
@@ -85,7 +85,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 const SizedBox(height: 15),
                 _isLoading
-                  ? const CircularProgressIndicator() // عرض مؤشر التحميل
+                  ? const CircularProgressIndicator() 
                   : buildSignInButton(signIn),
                 const SizedBox(height: 20),
                 buildRegisterRedirectButton(context),
