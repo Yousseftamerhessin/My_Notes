@@ -12,17 +12,26 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+  bool _isLoading = false; // لإدارة حالة التحميل
 
   Future<void> signIn() async {
+    setState(() {
+      _isLoading = true; // عرض مؤشر التحميل
+    });
     try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: _emailController.text.trim(),
         password: _passwordController.text.trim(),
       );
+      Navigator.of(context).pushReplacementNamed('/'); // انتقل إلى الشاشة الرئيسية
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Failed to sign in: ${e.toString()}')),
       );
+    } finally {
+      setState(() {
+        _isLoading = false; // إخفاء مؤشر التحميل
+      });
     }
   }
 
@@ -46,15 +55,12 @@ class _LoginScreenState extends State<LoginScreen> {
                   'assets/photo/NotesIcon.png',
                   height: 150.0,
                 ),
-                const SizedBox(
-                  height: 20.0,
-                ),
+                const SizedBox(height: 20.0),
                 const Text(
                   'SIGN IN',
                   style: TextStyle(
                     fontSize: 40,
                     fontWeight: FontWeight.bold,
-                    color: Colors.black,
                   ),
                 ),
                 const Text(
@@ -62,12 +68,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
-                    color: Colors.black,
                   ),
                 ),
-                const SizedBox(
-                  height: 50.0,
-                ),
+                const SizedBox(height: 50.0),
                 buildTextField(
                   controller: _emailController,
                   icon: Icons.email,
@@ -81,7 +84,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   obscureText: true,
                 ),
                 const SizedBox(height: 15),
-                buildSignInButton(signIn),
+                _isLoading
+                  ? const CircularProgressIndicator() // عرض مؤشر التحميل
+                  : buildSignInButton(signIn),
                 const SizedBox(height: 20),
                 buildRegisterRedirectButton(context),
               ],

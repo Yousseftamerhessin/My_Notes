@@ -3,9 +3,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:dynamic_height_grid_view/dynamic_height_grid_view.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'item_gride_view.dart';
 
-class DynamicGrideView extends StatelessWidget {
+class DynamicGrideView extends StatefulWidget {
   final bool isNewFirst;
 
   const DynamicGrideView({
@@ -14,72 +15,89 @@ class DynamicGrideView extends StatelessWidget {
   });
 
   @override
+  _DynamicGrideViewState createState() => _DynamicGrideViewState();
+}
+
+class _DynamicGrideViewState extends State<DynamicGrideView> {
+  late bool _isNewFirst;
+
+  @override
+  void initState() {
+    super.initState();
+    _isNewFirst = widget.isNewFirst;
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return SizedBox.expand(
-      child: StreamBuilder<QuerySnapshot>(
-        stream: FirebaseFirestore.instance
-            .collection('notes')
-            .orderBy('date', descending: isNewFirst)
-            .snapshots(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
-          }
+    final user = FirebaseAuth.instance.currentUser;
 
-          if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-            return const Center(child: Text('No notes available.'));
-          }
+    if (user == null) {
+      return const Center(child: Text('User not logged in.'));
+    }
 
-          final items = snapshot.data!.docs.map((doc) {
-            final data = doc.data() as Map<String, dynamic>;
-            final timestamp = data['date'] as Timestamp?;
-            final date = timestamp != null
-                ? DateFormat('yyyy-MM-dd').format(timestamp.toDate())
-                : 'Unknown date';
+    return StreamBuilder<QuerySnapshot>(
+      stream: FirebaseFirestore.instance
+          .collection('notes')
+          .where('userId', isEqualTo: user.uid)
+          .orderBy('date', descending: _isNewFirst)
+          .snapshots(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(child: CircularProgressIndicator());
+        }
 
-            // التعامل مع اللون وتوفير قيمة افتراضية إذا كان اللون غير موجود
-            final colorValue = data['color'] as int?;
-            final color = colorValue != null ? Color(colorValue) : Colors.white;
+        if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+          return const Center(child: Text('No notes available.'));
+        }
 
-            return {
-              'id': doc.id,
-              'title': data['title'] ?? '',
-              'description': data['content'] ?? '',
-              'date': date,
-              'color': color, // إضافة اللون إلى البيانات
-            };
-          }).toList();
+        final items = snapshot.data!.docs.map((doc) {
+          final data = doc.data() as Map<String, dynamic>;
+          final timestamp = data['date'] as Timestamp?;
+          final date = timestamp != null
+              ? DateFormat('yyyy-MM-dd').format(timestamp.toDate())
+              : 'Unknown date';
 
-          return DynamicHeightGridView(
-            shrinkWrap: true,
-            itemCount: items.length,
-            crossAxisCount: 2,
-            crossAxisSpacing: 10,
-            mainAxisSpacing: 10,
-            builder: (context, index) {
-              final item = items[index];
-              return ItemGridView(
-                title: item['title']!,
-                description: item['description']!,
-                date: item['date']!,
-                color: item['color']!, // تمرير اللون إلى ItemGridView
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => EditNotes(
-                        noteId: item['id']!,
-                        initialTitle: item['title']!,
-                        initialContent: item['description']!,
-                      ),
+          final colorValue = data['color'] as int?;
+          final color = colorValue != null ? Color(colorValue) : Colors.white;
+
+          return {
+            'id': doc.id,
+            'title': data['title'] ?? '',
+            'description': data['content'] ?? '',
+            'date': date,
+            'color': color,
+          };
+        }).toList();
+
+        return DynamicHeightGridView(
+          shrinkWrap: true,
+          itemCount: items.length,
+          crossAxisCount: 2,
+          crossAxisSpacing: 10,
+          mainAxisSpacing: 10,
+          builder: (context, index) {
+            final item = items[index];
+            return ItemGridView(
+              title: item['title']!,
+              description: item['description']!,
+              date: item['date']!,
+              color: item['color']!,
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => EditNotes(
+                      noteId: item['id']!,
+                      initialTitle: item['title']!,
+                      initialContent: item['description']!,
                     ),
-                  );
-                },
-              );
-            },
-          );
-        },
-      ),
+                  ),
+                );
+              },
+            );
+          },
+        );
+      },
     );
   }
 }

@@ -23,15 +23,8 @@ class ItemGridView extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(8.0),
         decoration: BoxDecoration(
-          color: color, // استخدام اللون الممرر
+          color: color, 
           borderRadius: BorderRadius.circular(8.0),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.shade300,
-              blurRadius: 4.0,
-              spreadRadius: 2.0,
-            ),
-          ],
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -50,7 +43,6 @@ class ItemGridView extends StatelessWidget {
               overflow: TextOverflow.ellipsis,
               style: const TextStyle(
                 fontSize: 14.0,
-                color: Colors.grey,
               ),
             ),
             const SizedBox(height: 4.0),
@@ -58,7 +50,6 @@ class ItemGridView extends StatelessWidget {
               date,
               style: const TextStyle(
                 fontSize: 12.0,
-                color: Colors.grey,
               ),
             ),
           ],

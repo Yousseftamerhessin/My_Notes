@@ -1,16 +1,12 @@
 import 'package:flutter/material.dart';
 
-class CustomSearch extends StatefulWidget {
-  final Function(String) onSearch; // دالة البحث التي سيتم تمريرها من الوالد
+class CustomSearch extends StatelessWidget {
+  final Function(String) onSearch;
 
-  const CustomSearch({super.key, required this.onSearch});
-
-  @override
-  _CustomSearchState createState() => _CustomSearchState();
-}
-
-class _CustomSearchState extends State<CustomSearch> {
-  final TextEditingController _controller = TextEditingController();
+  const CustomSearch({
+    super.key,
+    required this.onSearch,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +19,7 @@ class _CustomSearchState extends State<CustomSearch> {
           borderRadius: BorderRadius.circular(30),
         ),
         child: TextField(
-          controller: _controller,
+          onChanged: onSearch, // استدعاء onSearch كلما تغير النص
           style: const TextStyle(
             fontSize: 16.0,
             color: Colors.white,
@@ -34,14 +30,10 @@ class _CustomSearchState extends State<CustomSearch> {
               Icons.search,
               size: 20,
             ),
-            prefixIconConstraints:
-                BoxConstraints(maxHeight: 20, minWidth: 25),
+            prefixIconConstraints: BoxConstraints(maxHeight: 20, minWidth: 25),
             border: InputBorder.none,
             hintText: 'Search Notes...',
           ),
-          onChanged: (text) {
-            widget.onSearch(text); // تنفيذ وظيفة البحث عند تغيير النص
-          },
         ),
       ),
     );

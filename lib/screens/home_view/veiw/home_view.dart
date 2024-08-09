@@ -10,7 +10,6 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.grey,
         onPressed: () {
           Navigator.push(
             context,

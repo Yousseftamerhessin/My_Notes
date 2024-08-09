@@ -17,6 +17,7 @@ class _NotesViewBodyState extends State<NotesViewBody> {
   void _toggleSortOrder() {
     setState(() {
       isNewFirst = !isNewFirst;
+      print('Sort order changed: $isNewFirst');
     });
   }
 

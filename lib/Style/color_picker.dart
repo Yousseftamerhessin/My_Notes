@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_colorpicker/flutter_colorpicker.dart'; // تأكد من استيراد الحزمة
+import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 
 Future<Color?> showColorPickerDialog(BuildContext context) {
   return showDialog<Color?>(
@@ -11,7 +11,7 @@ Future<Color?> showColorPickerDialog(BuildContext context) {
           child: BlockPicker(
             pickerColor: Colors.yellow, 
             onColorChanged: (Color color) {
-              Navigator.of(context).pop(color); // إغلاق الحوار مع اللون المحدد
+              Navigator.of(context).pop(color);
             },
             availableColors: const [
               Colors.red,

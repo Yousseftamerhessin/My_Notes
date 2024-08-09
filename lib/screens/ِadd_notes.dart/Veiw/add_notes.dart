@@ -1,5 +1,6 @@
 import 'package:NotesApp/Style/color_picker.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class AddNotes extends StatefulWidget {
@@ -10,7 +11,7 @@ class AddNotes extends StatefulWidget {
 class _AddNotesState extends State<AddNotes> {
   final titleController = TextEditingController();
   final contentController = TextEditingController();
-  Color _selectedColor = Colors.blue; 
+  Color _selectedColor = Colors.blue;
 
   Future<void> _selectColor() async {
     final color = await showColorPickerDialog(context);
@@ -24,6 +25,7 @@ class _AddNotesState extends State<AddNotes> {
   Future<void> _addNote() async {
     final title = titleController.text;
     final content = contentController.text;
+    final user = FirebaseAuth.instance.currentUser;
 
     if (title.isEmpty || content.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -34,12 +36,22 @@ class _AddNotesState extends State<AddNotes> {
       return;
     }
 
+    if (user == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('No user is currently logged in.'),
+        ),
+      );
+      return;
+    }
+
     try {
       await FirebaseFirestore.instance.collection('notes').add({
         'title': title,
         'content': content,
         'date': Timestamp.now(),
-        'color': _selectedColor.value, 
+        'color': _selectedColor.value,
+        'userId': user.uid, 
       });
       Navigator.pop(context);
     } catch (e) {
@@ -108,7 +120,6 @@ class _AddNotesState extends State<AddNotes> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _addNote,
-        backgroundColor: Colors.grey.shade800.withOpacity(0.8),
         child: const Icon(Icons.save),
       ),
     );

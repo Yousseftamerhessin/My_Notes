@@ -18,18 +18,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
   Future<void> signUp() async {
     if (passwordConfirmed()) {
       try {
-        final userCredential =
-            await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        final userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
           email: _emailController.text.trim(),
           password: _passwordController.text.trim(),
         );
 
         final user = userCredential.user;
 
-        await user?.updateProfile(displayName: _userNameController.text.trim());
-
-        await user?.reload();
-        Navigator.of(context).pushNamed('/');
+        if (user != null) {
+          await user.updateProfile(displayName: _userNameController.text.trim());
+          await user.reload();
+          Navigator.of(context).pushReplacementNamed('/'); // استخدم pushReplacementNamed للانتقال إلى الشاشة الرئيسية
+        }
       } catch (e) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Failed to sign up: ${e.toString()}')),
@@ -43,8 +43,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   }
 
   bool passwordConfirmed() {
-    return _passwordController.text.trim() ==
-        _confirmPasswordController.text.trim();
+    return _passwordController.text.trim() == _confirmPasswordController.text.trim();
   }
 
   @override
@@ -69,9 +68,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   'assets/photo/NotesIcon.png',
                   height: 150.0,
                 ),
-                const SizedBox(
-                  height: 20.0,
-                ),
+                const SizedBox(height: 20.0),
                 const Text(
                   'SIGN UP',
                   style: TextStyle(
@@ -88,9 +85,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     color: Colors.black,
                   ),
                 ),
-                const SizedBox(
-                  height: 50.0,
-                ),
+                const SizedBox(height: 50.0),
                 buildTextField(
                   controller: _userNameController,
                   icon: Icons.person,
