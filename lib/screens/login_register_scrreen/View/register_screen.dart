@@ -28,7 +28,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         if (user != null) {
           await user.updateProfile(displayName: _userNameController.text.trim());
           await user.reload();
-          Navigator.of(context).pushReplacementNamed('/');  
+          Navigator.of(context).pushReplacementNamed('/login');  
         }
       } catch (e) {
         ScaffoldMessenger.of(context).showSnackBar(

@@ -1,11 +1,15 @@
-import 'package:NotesApp/Logic/Auth.dart';
-import 'package:NotesApp/Logic/theme_provider.dart';
-import 'package:NotesApp/Style/theme.data/Light_Theme.dart';
-import 'package:NotesApp/screens/Splash_screen/View/splashScreen.dart';
+import 'package:NotesApp/screens/home_view/veiw/home_view.dart';
+import 'package:NotesApp/screens/login_register_scrreen/View/Login_screen.dart';
+import 'package:NotesApp/screens/login_register_scrreen/View/register_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'Logic/Auth.dart';
+import 'Logic/theme_provider.dart';
+import 'Style/theme.data/Light_Theme.dart';
+import 'screens/Splash_screen/View/splashScreen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -34,7 +38,13 @@ class NotesApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: themeProvider.themeData,
-      home: hasSeenSplash ? const Auth() : const SplashScreens(),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => hasSeenSplash ? const Auth() : const SplashScreens(),
+        '/login': (context) => const LoginScreen(),
+        '/register': (context) => const RegisterScreen(),
+        '/home': (context) => const HomeView(),
+      },
     );
   }
 }

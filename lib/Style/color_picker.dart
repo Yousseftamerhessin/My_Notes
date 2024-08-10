@@ -23,6 +23,7 @@ Future<Color?> showColorPickerDialog(BuildContext context) {
               Color(0xFFFFD573),
               Color(0xFFFDA0B3),
               Color(0xFF41B7FF),
+              Color(0xFFFF65A3),
               Color(0xFFFE6902),
             ],
           ),
