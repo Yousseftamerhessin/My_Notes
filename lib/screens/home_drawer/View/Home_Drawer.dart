@@ -15,37 +15,62 @@ class HomeDrawer extends StatelessWidget {
     final userName = user?.displayName ?? 'User name';
 
     return Drawer(
-      child: Column(
-        children: <Widget>[
-          UserAccountsDrawerHeader(
-            accountName: Text(userName),
-            accountEmail: Text(userEmail),
-            currentAccountPicture: CircleAvatar(
-              child: Text(userName.isNotEmpty ? userName[0] : 'A'),
-            ),
-          ),
-          ListTile(
-            leading: const Icon(Icons.home_outlined),
-            title: const Text('Home page'),
-            onTap: () {
-              Navigator.pop(context);
-            },
-          ),
-          const DarkMode(),
-          const RateApp(),
-          const HelpTile(),
-          const LogOut(),
-           const Spacer(),    
-          const Padding(
-            padding: EdgeInsets.all(16.0), 
-            child: Text(
-              'Development by Youssef Tamer',
-              style: TextStyle(
-                fontSize: 14.0,
+      child: Container(
+        color: Colors.green[900],
+        child: Column(
+          children: <Widget>[
+            UserAccountsDrawerHeader(
+              decoration: BoxDecoration(
+                color: Colors.green[800],
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.5),
+                    spreadRadius: 1,
+                    blurRadius: 10,
+                    offset: Offset(0, 4), 
+                  ),
+                ],
+              ),
+              accountName: Text(
+                userName,
+                style: TextStyle(color: Colors.white), 
+              ),
+              accountEmail: Text(
+                userEmail,
+                style: TextStyle(color: Colors.white70), 
+              ),
+              currentAccountPicture: CircleAvatar(
+                backgroundColor: Colors.white, 
+                child: Text(
+                  userName.isNotEmpty ? userName[0] : 'A',
+                  style: TextStyle(color: Colors.green[800]), 
+                ),
               ),
             ),
-          ),
-        ],
+            ListTile(
+              leading: const Icon(Icons.home_outlined),
+              title: const Text('Home page'),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+            const DarkMode(),
+            const RateApp(),
+            const HelpTile(),
+            const LogOut(),
+            const Spacer(),
+            const Padding(
+              padding: EdgeInsets.all(16.0),
+              child: Text(
+                'Development by Youssef Tamer',
+                style: TextStyle(
+                  fontSize: 14.0,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
