@@ -33,11 +33,11 @@ class HomeDrawer extends StatelessWidget {
               ),
               accountName: Text(
                 userName,
-                style: TextStyle(color: Colors.white), 
+                style: const TextStyle(color: Colors.white), 
               ),
               accountEmail: Text(
                 userEmail,
-                style: TextStyle(color: Colors.white70), 
+                style: const TextStyle(color: Colors.white70), 
               ),
               currentAccountPicture: CircleAvatar(
                 backgroundColor: Colors.white, 
