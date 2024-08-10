@@ -5,6 +5,6 @@ final ThemeData lightTheme = ThemeData(
   hintColor:  Colors.black54,
   scaffoldBackgroundColor: Colors.grey[200],
    iconTheme: const IconThemeData(
-    color: Colors.black,     
+    color: Colors.black,    
   ),
 );

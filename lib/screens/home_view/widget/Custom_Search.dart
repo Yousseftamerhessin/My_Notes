@@ -16,7 +16,7 @@ class CustomSearch extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 10),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(30),
-          color: Colors.grey[200],
+          color: Colors.grey,
         ),
         child: TextField(
           onChanged: onSearch,

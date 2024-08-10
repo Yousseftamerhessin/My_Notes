@@ -49,7 +49,12 @@ class ThirdSplash extends StatelessWidget {
                   ModalRoute.withName('/'),
                 );
               },
-              child: const Text('Back'),
+              child: const Text(
+                'Back',
+                style: TextStyle(
+                  color: Colors.black54,
+                ),
+              ),
             ),
           ),
         ]),

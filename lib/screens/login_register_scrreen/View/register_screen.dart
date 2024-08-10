@@ -65,8 +65,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
               child: SingleChildScrollView(
                 child: Center(
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
+                      const SizedBox(height: 50,),
                       Image.asset(
                         'assets/photo/NotesIcon.png',
                         height: 150.0,
@@ -130,7 +130,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 child: Text(
                   'Development by Youssef Tamer',
                   style: TextStyle(
-                    fontSize: 16.0,
+                    fontSize: 14.0,
                   ),
                   textAlign: TextAlign.center, 
                 ),

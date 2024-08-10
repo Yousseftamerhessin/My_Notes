@@ -56,7 +56,7 @@ class SecondSplash extends StatelessWidget {
               child: const Text(
                 'Back',
                 style: TextStyle(
-                  color: Colors.black,
+                  color: Colors.black54,
                 ),
               ),
             ),

@@ -52,9 +52,8 @@ class _LoginScreenState extends State<LoginScreen> {
               child: SingleChildScrollView(
                 child: Center(
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
+                      const SizedBox(height: 100,),
                       Image.asset(
                         'assets/photo/NotesIcon.png',
                         height: 150.0,
@@ -98,13 +97,12 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
             ),
-            // Footer text
             const Padding(
               padding: EdgeInsets.all(16.0),
               child: Text(
                 'Development by Youssef Tamer',
                 style: TextStyle(
-                  fontSize: 16.0,
+                  fontSize: 14.0,
                 ),
                 textAlign: TextAlign.center,
               ),
