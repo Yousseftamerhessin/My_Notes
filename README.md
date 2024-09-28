@@ -1,7 +1,6 @@
-# flutter_application_1
+# My Notes
 
-A new Flutter project.
-
+A versatile note-taking app built with Flutter and Dart, catering to students, professionals, and organizational enthusiasts. Features include note management, cloud storage with Firebase, Provider for state management, and customizable note cards. 
 ## Getting Started
 
 [A few resources to get you started if this is your first Flutter project:
